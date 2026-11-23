@@ -4,9 +4,7 @@ import {
   createRandomBoard,
   isValidShot,
   updateBoard,
-  isGameComplete,
-  findShipAt,
-  isShipSunk
+  isGameComplete
 } from '@chingchiehwang/arcade-core';
 import { games } from '../db.js';
 import { Game } from '../game.js';
@@ -143,9 +141,7 @@ router.post(
     }
     await saveGame(game);
 
-    const ship = findShipAt(grid, x, y);
-    const sunk = ship !== null && isShipSunk(grid, ship);
-    return c.json({ result: grid.shots[y][x], sunk: sunk, game: game.getView(user) }, 201);
+    return c.json({ result: grid.shots[y][x] }, 201);
   }
 );
 
